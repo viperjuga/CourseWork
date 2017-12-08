@@ -1,0 +1,29 @@
+﻿<Window x:Class="CourseWork.View.NewTaskWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CourseWork.View"
+        xmlns:viewModel="clr-namespace:CourseWork.ViewModel"
+        mc:Ignorable="d" Name="This"
+        Title="IsIdEnabledWindow" Height="300" Width="300">
+    <Window.DataContext>
+        <viewModel:NewTaskViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <local:TaskView Task="{Binding DataContext.NewTask, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=Window, Mode=FindAncestor}}"
+                        IsIdEnabled="True" Grid.Row="0"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Content="Confirm" Command="{Binding ConfirmCommand}" CommandParameter="{Binding ElementName=This}" Grid.Column="0"/>
+            <Button Content="Cancel" Command="{Binding CancelCommand}" CommandParameter="{Binding ElementName=This}" Grid.Column="1"/>
+        </Grid>
+    </Grid>
+</Window>
