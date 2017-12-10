@@ -26,21 +26,32 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Label Content="Id" ContentStringFormat="{}{0}:" Grid.Column="0" Grid.Row="0"/>
-        <TextBox Text="{Binding SelectedTask.Id}" IsEnabled="{Binding IsIdEnabled, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="0"/>
+        <Border Grid.Column="1" Grid.Row="0" BorderBrush="{StaticResource LightBlue}" BorderThickness="1" Margin="1">
+            <TextBox Text="{Binding SelectedTask.Id}" IsEnabled="{Binding IsIdEnabled, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0"/>
+        </Border>
 
         <Label Content="Name" ContentStringFormat="{}{0}:" Grid.Column="0" Grid.Row="1"/>
-        <TextBox Text="{Binding SelectedTask.Name}"  Grid.Column="1" Grid.Row="1"/>
+        <Border Grid.Column="1" Grid.Row="1" BorderBrush="{StaticResource LightBlue}" BorderThickness="1" Margin="1">
+            <TextBox Text="{Binding SelectedTask.Name}" />
+        </Border>
 
         <Label Content="Description" ContentStringFormat="{}{0}:" Grid.Column="0" Grid.Row="2"/>
-        <TextBox Text="{Binding SelectedTask.Description}"  Grid.Column="1" Grid.Row="2"/>
+        <Border Grid.Column="1" Grid.Row="2" BorderBrush="{StaticResource LightBlue}" BorderThickness="1" Margin="1">
+            <TextBox Text="{Binding SelectedTask.Description}" Height="70" TextWrapping="Wrap"/>
+        </Border>
 
         <Label Content="Start time" ContentStringFormat="{}{0}:" Grid.Column="0" Grid.Row="3"/>
-        <xctk:DateTimeUpDown Text="{Binding SelectedTask.StartTime}"  Grid.Column="1" Grid.Row="3" TextAlignment="Left"/>
+        <Border Grid.Column="1" Grid.Row="3" BorderBrush="{StaticResource LightBlue}" BorderThickness="1" Margin="1">
+            <xctk:DateTimeUpDown Text="{Binding SelectedTask.StartTime}" TextAlignment="Left" Format="Custom" FormatString="dd/MM/yyyy HH:mm"/>
+        </Border>
 
         <Label Content="End time" ContentStringFormat="{}{0}:" Grid.Column="0" Grid.Row="4"/>
-        <xctk:DateTimeUpDown Text="{Binding SelectedTask.EndTime}"  Grid.Column="1" Grid.Row="4" TextAlignment="Left"/>
+        <Border Grid.Column="1" Grid.Row="4" BorderBrush="{StaticResource LightBlue}" BorderThickness="1" Margin="1">
+            <xctk:DateTimeUpDown Text="{Binding SelectedTask.EndTime}" TextAlignment="Left" Format="Custom" FormatString="dd/MM/yyyy HH:mm"/>
+        </Border>
 
         <Label Content="Priority" ContentStringFormat="{}{0}:" Grid.Column="0" Grid.Row="5"/>
-        <ComboBox SelectedItem="{Binding SelectedTask.Priority}" ItemsSource="{Binding Priorities}"  Grid.Column="1" Grid.Row="5"/>
+        <ComboBox SelectedItem="{Binding SelectedTask.Priority}" ItemsSource="{Binding Priorities}" Grid.Column="1" Grid.Row="5" Style="{StaticResource ComboBoxBlueStyle}" Margin="2"/>
+
     </Grid>
 </UserControl>

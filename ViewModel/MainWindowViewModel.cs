@@ -18,7 +18,10 @@ namespace CourseWork.ViewModel {
             //TODO:Load tasks from file
             _tasks = new ObservableCollection<TaskAdapter>()
             {
-                new TaskAdapter(new Task(){ Id = 0, Name = "Make course work", Priority = Priority.Major, Description = "We need to start it now", StartTime = DateTime.Now, EndTime = DateTime.ParseExact("20122017","ddMMyyyy", CultureInfo.CurrentCulture)})
+                new TaskAdapter(new Task(){ Id = 0, Name = "Make course work1", Priority = Priority.Major, Description = "We need to start it now", StartTime = DateTime.Now, EndTime = DateTime.ParseExact("20122017","ddMMyyyy", CultureInfo.CurrentCulture)}),
+                 new TaskAdapter(new Task(){ Id = 0, Name = "Make course work2", Priority = Priority.Major, Description = "We need to start it now", StartTime = DateTime.Now, EndTime = DateTime.ParseExact("19122017","ddMMyyyy", CultureInfo.CurrentCulture)}),
+                 new TaskAdapter(new Task(){ Id = 0, Name = "Make course work3", Priority = Priority.Major, Description = "We need to start it now", StartTime = DateTime.Now, EndTime = DateTime.ParseExact("18122017","ddMMyyyy", CultureInfo.CurrentCulture)}),
+                 new TaskAdapter(new Task(){ Id = 0, Name = "Make course work4", Priority = Priority.Major, Description = "We need to start it now", StartTime = DateTime.Now, EndTime = DateTime.ParseExact("17122017","ddMMyyyy", CultureInfo.CurrentCulture)})
             };
         }
 
@@ -30,6 +33,14 @@ namespace CourseWork.ViewModel {
                     _tasks = new ObservableCollection<TaskAdapter>();
                 }
                 return _tasks;
+            }
+        }
+
+        public ObservableCollection<TaskAdapter> DeadlineTasks
+        {
+            get
+            {
+                return new ObservableCollection<TaskAdapter>(Tasks.OrderBy(x => x.EndTime).Take(3));
             }
         }
 
@@ -60,6 +71,23 @@ namespace CourseWork.ViewModel {
                     () => true);
                 }
                 return _addCommand;
+            }
+        }
+
+        private RelayCommand _deleteCommand;
+        public RelayCommand DeleteCommand
+        {
+            get
+            {
+                if(_deleteCommand == null)
+                {
+                    _deleteCommand = new RelayCommand(
+                        () => {                            
+                            Tasks.Remove(SelectedTask);
+                        }, () => true
+                        );
+                }
+                return _deleteCommand;
             }
         }
     }

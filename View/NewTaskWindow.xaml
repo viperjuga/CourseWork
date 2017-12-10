@@ -22,8 +22,8 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Content="Confirm" Command="{Binding ConfirmCommand}" CommandParameter="{Binding ElementName=This}" Grid.Column="0"/>
-            <Button Content="Cancel" Command="{Binding CancelCommand}" CommandParameter="{Binding ElementName=This}" Grid.Column="1"/>
+            <Button Content="Confirm" Command="{Binding ConfirmCommand}" CommandParameter="{Binding ElementName=This}" Grid.Column="0" Style="{StaticResource BlueButtonStyle}"/>
+            <Button Content="Cancel" Command="{Binding CancelCommand}" CommandParameter="{Binding ElementName=This}" Grid.Column="1" Style="{StaticResource YellowButtonStyle}"/>
         </Grid>
     </Grid>
 </Window>
