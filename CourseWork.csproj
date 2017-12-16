@@ -183,7 +183,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CourseWork.FileWorker\CourseWork.FileWorker.csproj">
+    <ProjectReference Include="CourseWork.FileWorker\CourseWork.FileWorker.csproj">
       <Project>{083dc4e8-ff71-46ae-af8f-7bffbe358e3f}</Project>
       <Name>CourseWork.FileWorker</Name>
     </ProjectReference>

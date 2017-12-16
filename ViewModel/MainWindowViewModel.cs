@@ -172,6 +172,6 @@ namespace CourseWork.ViewModel {
                 }
                 return _reportCommand;
             }
-        }\
+        }
     }
 }

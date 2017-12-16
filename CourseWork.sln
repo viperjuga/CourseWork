@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27130.2003
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseWork", "CourseWork.csproj", "{43589051-C93F-447B-BA8C-58346030F18D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseWork.FileWorker", "..\CourseWork.FileWorker\CourseWork.FileWorker.csproj", "{083DC4E8-FF71-46AE-AF8F-7BFFBE358E3F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseWork.FileWorker", "CourseWork.FileWorker\CourseWork.FileWorker.csproj", "{083DC4E8-FF71-46AE-AF8F-7BFFBE358E3F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{87524CC2-BC41-4EB3-B450-ED8C27DEDC72}"
 EndProject
