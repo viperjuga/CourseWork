@@ -5,9 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CourseWork.Adapter;
+using CourseWork.Models.Enum;
 using GalaSoft.MvvmLight;
-using Enum = System.Enum;
-using Priority = CourseWork.Enum.Priority;
 namespace CourseWork.ViewModel {
     public class TaskViewModel : ViewModelBase {
 

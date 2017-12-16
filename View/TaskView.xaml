@@ -42,12 +42,12 @@
 
         <Label Content="Start time" ContentStringFormat="{}{0}:" Grid.Column="0" Grid.Row="3"/>
         <Border Grid.Column="1" Grid.Row="3" BorderBrush="{StaticResource LightBlue}" BorderThickness="1" Margin="1">
-            <xctk:DateTimeUpDown Text="{Binding SelectedTask.StartTime}" TextAlignment="Left" Format="Custom" FormatString="dd/MM/yyyy HH:mm"/>
+            <xctk:DateTimeUpDown Value="{Binding SelectedTask.StartTime, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Left" Format="Custom" FormatString="dd/MM/yyyy HH:mm"/>
         </Border>
 
         <Label Content="End time" ContentStringFormat="{}{0}:" Grid.Column="0" Grid.Row="4"/>
         <Border Grid.Column="1" Grid.Row="4" BorderBrush="{StaticResource LightBlue}" BorderThickness="1" Margin="1">
-            <xctk:DateTimeUpDown Text="{Binding SelectedTask.EndTime}" TextAlignment="Left" Format="Custom" FormatString="dd/MM/yyyy HH:mm"/>
+            <xctk:DateTimeUpDown Value="{Binding SelectedTask.EndTime, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Left" Format="Custom" FormatString="dd/MM/yyyy HH:mm"/>
         </Border>
 
         <Label Content="Priority" ContentStringFormat="{}{0}:" Grid.Column="0" Grid.Row="5"/>

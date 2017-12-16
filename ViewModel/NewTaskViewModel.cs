@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using CourseWork.Adapter;
-using CourseWork.Model;
+using CourseWork.Models.Model;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 

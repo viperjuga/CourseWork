@@ -7,7 +7,7 @@
         xmlns:viewModel="clr-namespace:CourseWork.ViewModel"
         xmlns:view="clr-namespace:CourseWork.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="525">
+        Title="MainWindow" Height="520" Width="525">
     <Window.DataContext>
         <viewModel:MainWindowViewModel/>
     </Window.DataContext>
@@ -27,8 +27,9 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="65"/>
-                <RowDefinition Height="4*"/>
                 <RowDefinition Height="30"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="60"/>
             </Grid.RowDefinitions>
             <DockPanel Margin="4" Background="{StaticResource Blue}">
                 <TextBlock Text="Sort filter  " Margin="4,0,0,0" Foreground="{StaticResource Yellow}" FontWeight="DemiBold" VerticalAlignment="Center"/>
@@ -40,7 +41,7 @@
                         <ColumnDefinition/>
                         <ColumnDefinition Width="10"/>
                     </Grid.ColumnDefinitions>
-                    <ListBox  ItemsSource="{Binding DeadlineTasks}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedTask}" Margin="1,0,0,0"
+                    <ListBox  ItemsSource="{Binding DeadlineTasks, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedTask}" Margin="1,0,0,0"
                               ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" Height="60">
                         <ListBox.Template>
                             <ControlTemplate>
@@ -52,15 +53,26 @@
                     <Line Grid.Column="1" X1="5" X2="5" Y1="3" Y2="50" Stroke="{StaticResource Red}" StrokeThickness="5"     />
                 </Grid>
             </Border>
-            <ListBox Grid.Row="2" ItemsSource="{Binding Tasks}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedTask}" BorderBrush="{StaticResource Blue}" BorderThickness="2"  Margin="4" 
+            <DockPanel Margin="4" Background="{StaticResource Blue}" Grid.Row="2">
+                <TextBlock Text="Search  " Margin="4,0,0,0" Foreground="{StaticResource Yellow}" FontWeight="DemiBold" VerticalAlignment="Center"/>
+                <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Margin="3"/>
+            </DockPanel>
+            <ListBox Grid.Row="3" ItemsSource="{Binding PreviewTasks}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedTask}" BorderBrush="{StaticResource Blue}" BorderThickness="2"  Margin="4" 
                      ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                <ListBox.ContextMenu>
-                    <ContextMenu>
-                        <MenuItem Header="Delete task" Command="{Binding DeleteCommand}"/>
-                    </ContextMenu>
-                </ListBox.ContextMenu>
             </ListBox>
-            <Button Grid.Row="3" Content="Add" Command="{Binding AddCommand}" Style="{StaticResource BlueButtonStyle}" Margin="4,0,4,4"/>
+            <Grid  Grid.Row="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Content="Report" Command="{Binding ReportCommand}" Style="{StaticResource BlueButtonStyle}" Margin="5" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"/>
+                <Button Content="Add" Command="{Binding AddCommand}" Style="{StaticResource BlueButtonStyle}" Margin="5" Grid.Column="0" Grid.Row="1"/>
+                <Button Content="Remove" Command="{Binding DeleteCommand}" Style="{StaticResource BlueButtonStyle}" Margin="5" Grid.Column="1" Grid.Row="1"/>
+            </Grid>
         </Grid>
         <!--GroupBox Grid.Column="0">
             <GroupBox.Header>
@@ -86,7 +98,7 @@
                     <view:TaskView Task="{Binding DataContext.SelectedTask, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=Window, Mode=FindAncestor}}"
                            IsIdEnabled="False"/>
                 </Grid>
-            </Grid>            
+            </Grid>
         </Border>
     </Grid>
 </Window>

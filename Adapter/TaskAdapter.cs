@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using CourseWork.Enum;
-using CourseWork.Model;
+using CourseWork.Models.Enum;
+using CourseWork.Models.Model;
 using GalaSoft.MvvmLight;
 
 namespace CourseWork.Adapter {
@@ -71,5 +71,7 @@ namespace CourseWork.Adapter {
                 RaisePropertyChanged(() => Priority);
             }
         }
+
+        
     }
 }

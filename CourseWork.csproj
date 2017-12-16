@@ -33,6 +33,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>if_Clipboard_tasks_report_business_checking_verification_list_1886797.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="GalaSoft.MvvmLight, Version=5.3.0.19026, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
       <HintPath>packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
@@ -89,8 +92,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Adapter\TaskAdapter.cs" />
-    <Compile Include="Enum\Priority.cs" />
-    <Compile Include="Model\Task.cs" />
+    <Compile Include="Helper\ModelConverter.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\NewTaskViewModel.cs" />
     <Compile Include="ViewModel\TaskViewModel.cs" />
@@ -179,6 +181,22 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CourseWork.FileWorker\CourseWork.FileWorker.csproj">
+      <Project>{083dc4e8-ff71-46ae-af8f-7bffbe358e3f}</Project>
+      <Name>CourseWork.FileWorker</Name>
+    </ProjectReference>
+    <ProjectReference Include="CourseWork.Models\CourseWork.Models.csproj">
+      <Project>{50c1419b-fbb6-449f-b154-4d55724b6f29}</Project>
+      <Name>CourseWork.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\if_Clipboard_tasks_report_business_checking_verification_list_1886797.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="if_Clipboard_tasks_report_business_checking_verification_list_1886797.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

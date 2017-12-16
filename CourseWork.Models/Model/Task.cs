@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CourseWork.Enum;
+using CourseWork.Models.Enum;
 
-namespace CourseWork.Model {
+namespace CourseWork.Models.Model {
     public class Task {
         public int Id { get; set; }
         public string Name { get; set; }
