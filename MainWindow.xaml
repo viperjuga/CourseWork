@@ -1,4 +1,4 @@
-﻿<Window x:Class="CourseWork.MainWindow"
+﻿<controls:MetroWindow x:Class="CourseWork.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,11 +6,12 @@
         xmlns:local="clr-namespace:CourseWork"
         xmlns:viewModel="clr-namespace:CourseWork.ViewModel"
         xmlns:view="clr-namespace:CourseWork.View"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="520" Width="525">
-    <Window.DataContext>
+        Title="Task Companion" Height="520" Width="525">
+    <controls:MetroWindow.DataContext>
         <viewModel:MainWindowViewModel/>
-    </Window.DataContext>
+    </controls:MetroWindow.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -20,46 +21,42 @@
             <RowDefinition Height="50"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Border Grid.Row="0" Grid.ColumnSpan="2"  Style="{StaticResource HeaderStyle}">
-            <TextBlock Text="Task Companion" VerticalAlignment="Center" Style="{StaticResource HeaderTextStyle}" Padding="20,0,0,0"/>
+        <Border Grid.Row="0" Grid.ColumnSpan="2">
+            <TextBlock Text="Task Companion" VerticalAlignment="Center" Padding="20,0,0,0" FontSize="{StaticResource HeaderFontSize}" Background="{StaticResource ControlBackgroundBrush}"/>
         </Border>
         <Grid  Grid.Column="0" Grid.Row="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="65"/>
-                <RowDefinition Height="30"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="4*"/>
-                <RowDefinition Height="60"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <DockPanel Margin="4" Background="{StaticResource Blue}">
-                <TextBlock Text="Sort filter  " Margin="4,0,0,0" Foreground="{StaticResource Yellow}" FontWeight="DemiBold" VerticalAlignment="Center"/>
-                <ComboBox Text="Filter"  Style="{StaticResource ComboBoxBlueStyle}" ItemContainerStyle="{StaticResource ComboBoxItemBlueStyle}"/>
+            <DockPanel Margin="4" >
+                <TextBlock Text="Sort filter  " Margin="4,0,0,0" FontWeight="DemiBold" VerticalAlignment="Center"/>
+                <!--<ComboBox Text="Filter"  ItemContainerStyle="{StaticResource ComboBoxItemBlueStyle}"/>-->
             </DockPanel>
-            <Border Grid.Row="1" BorderBrush="{StaticResource Red}" BorderThickness="2" Margin="4,0,4,0">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="10"/>
-                    </Grid.ColumnDefinitions>
-                    <ListBox  ItemsSource="{Binding DeadlineTasks, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedTask}" Margin="1,0,0,0"
-                              ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" Height="60">
-                        <ListBox.Template>
-                            <ControlTemplate>
-                                <ItemsPresenter />
-                            </ControlTemplate>
-                        </ListBox.Template>
-                    </ListBox>
-                    <Ellipse Grid.Column="1" Fill="{StaticResource Red}" Stroke="{StaticResource Red}" Width="6" Height="6" VerticalAlignment="Bottom" Margin="0,0,0,2"/>
-                    <Line Grid.Column="1" X1="5" X2="5" Y1="3" Y2="50" Stroke="{StaticResource Red}" StrokeThickness="5"     />
-                </Grid>
-            </Border>
-            <DockPanel Margin="4" Background="{StaticResource Blue}" Grid.Row="2">
-                <TextBlock Text="Search  " Margin="4,0,0,0" Foreground="{StaticResource Yellow}" FontWeight="DemiBold" VerticalAlignment="Center"/>
-                <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Margin="3"/>
-            </DockPanel>
-            <ListBox Grid.Row="3" ItemsSource="{Binding PreviewTasks}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedTask}" BorderBrush="{StaticResource Blue}" BorderThickness="2"  Margin="4" 
-                     ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-            </ListBox>
+            <controls:Badged Badge="{Binding Path=DeadlineTasks.Count}" Grid.Row="1">
+                <GroupBox Header="Deadlines">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <ListBox  ItemsSource="{Binding DeadlineTasks, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedTask}"
+                              ScrollViewer.HorizontalScrollBarVisibility="Disabled" Height="60">
+                        </ListBox>
+                    </ScrollViewer>
+                </GroupBox>
+            </controls:Badged>
+            <GroupBox Grid.Row="3">
+                <GroupBox.Header>
+                    <DockPanel>
+                        <Label Content="TASKS" Foreground="White" FontFamily="{StaticResource ContentFontFamily}"></Label>
+                        <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
+                    </DockPanel>
+                </GroupBox.Header>
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <ListBox  ItemsSource="{Binding PreviewTasks}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedTask}" 
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
+                </ScrollViewer>
+            </GroupBox>
             <Grid  Grid.Row="4">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -69,36 +66,16 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button Content="Report" Command="{Binding ReportCommand}" Style="{StaticResource BlueButtonStyle}" Margin="5" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"/>
-                <Button Content="Add" Command="{Binding AddCommand}" Style="{StaticResource BlueButtonStyle}" Margin="5" Grid.Column="0" Grid.Row="1"/>
-                <Button Content="Remove" Command="{Binding DeleteCommand}" Style="{StaticResource BlueButtonStyle}" Margin="5" Grid.Column="1" Grid.Row="1"/>
+                <Button Content="Report" Command="{Binding ReportCommand}"  Margin="5" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"/>
+                <Button Content="Add" Command="{Binding AddCommand}"  Margin="5" Grid.Column="0" Grid.Row="1"/>
+                <Button Content="Remove" Command="{Binding DeleteCommand}"  Margin="5" Grid.Column="1" Grid.Row="1"/>
             </Grid>
         </Grid>
-        <!--GroupBox Grid.Column="0">
-            <GroupBox.Header>
-                <StackPanel Orientation="Horizontal" Height="30">
-                    <TextBlock Text="Tasks" VerticalAlignment="Center"/>
-                    <Button Content="Add" Command="{Binding AddCommand}" Margin="5"/>
-                </StackPanel>
-            </GroupBox.Header>
-            <ListBox ItemsSource="{Binding Tasks}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedTask}" />
-            
-        </-->
-
-        <Border Grid.Column="1" Grid.Row="1" BorderBrush="{StaticResource Blue}" BorderThickness="2" Margin="4">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="20"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Border Background="{StaticResource Blue}">
-                    <TextBlock Text="Selected Task" Foreground="{StaticResource Yellow}" FontWeight="DemiBold" Margin="4,0,0,0" VerticalAlignment="Center"/>
-                </Border>
-                <Grid Grid.Row="1" Margin="2">
-                    <view:TaskView Task="{Binding DataContext.SelectedTask, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=Window, Mode=FindAncestor}}"
+        <GroupBox Header="Selected Task" Grid.Column="1" Grid.Row="1" Margin="20,5,5,5">
+            <Grid Margin="2">
+                <view:TaskView Task="{Binding DataContext.SelectedTask, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=Window, Mode=FindAncestor}}"
                            IsIdEnabled="False"/>
-                </Grid>
             </Grid>
-        </Border>
+        </GroupBox>
     </Grid>
-</Window>
+</controls:MetroWindow>

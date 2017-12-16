@@ -5,29 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CourseWork.View"
         xmlns:viewModel="clr-namespace:CourseWork.ViewModel"
-        mc:Ignorable="d" Name="This"
-        Title="IsIdEnabledWindow" Height="330" Width="300" Icon="../Image/if_Clipboard_tasks_report_business_checking_verification_list_1886797.ico">
+        mc:Ignorable="d" Name="This" WindowStartupLocation="CenterOwner"
+        Title="IsIdEnabledWindow" Height="350" Width="300" Icon="../Image/if_Clipboard_tasks_report_business_checking_verification_list_1886797.ico">
     <Window.DataContext>
         <viewModel:NewTaskViewModel/>
     </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Border Grid.Row="0" Grid.ColumnSpan="2"  Style="{StaticResource HeaderStyle}">
-            <TextBlock Text="New Task" VerticalAlignment="Center" Style="{StaticResource HeaderTextStyle}" Padding="20,0,0,0"/>
-        </Border>
+        <GroupBox Header="New Task" Grid.Row="0">
         <local:TaskView Task="{Binding DataContext.NewTask, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=Window, Mode=FindAncestor}}"
-                        IsIdEnabled="True" Grid.Row="1" Margin="5"/>
-        <Grid Grid.Row="2">
+                        IsIdEnabled="True"  Margin="5"/>
+        </GroupBox>
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Content="Confirm" Command="{Binding ConfirmCommand}" CommandParameter="{Binding ElementName=This}" Grid.Column="0" Style="{StaticResource BlueButtonStyle}" Margin="5"/>
-            <Button Content="Cancel" Command="{Binding CancelCommand}" CommandParameter="{Binding ElementName=This}" Grid.Column="1" Style="{StaticResource YellowButtonStyle}" Margin="5"/>
+            <Button Content="Confirm" Command="{Binding ConfirmCommand}" CommandParameter="{Binding ElementName=This}" Grid.Column="0"  Margin="5"/>
+            <Button Content="Cancel" Command="{Binding CancelCommand}" CommandParameter="{Binding ElementName=This}" Grid.Column="1"  Margin="5"/>
         </Grid>
     </Grid>
 </Window>

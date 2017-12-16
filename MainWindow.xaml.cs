@@ -14,12 +14,13 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using CourseWork.ViewModel;
+using MahApps.Metro.Controls;
 
 namespace CourseWork {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window {
+    public partial class MainWindow : MetroWindow {
         public MainWindow() {
             InitializeComponent();
             var context = (MainWindowViewModel)DataContext;
