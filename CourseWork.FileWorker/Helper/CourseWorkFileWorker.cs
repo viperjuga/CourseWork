@@ -25,7 +25,7 @@ namespace CourseWork.FileWorker.Helper {
                 }
                 try {
                     result.Add(new Task() {
-                        Id = int.Parse(parsedLine[0]),
+                        Id = Guid.Parse(parsedLine[0]),
                         Name = parsedLine[1],
                         Description = parsedLine[2],
                         StartTime = DateTime.ParseExact(parsedLine[3], "ddMMyyyyHHmm", CultureInfo.CurrentCulture),

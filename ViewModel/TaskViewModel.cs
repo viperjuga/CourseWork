@@ -15,6 +15,10 @@ namespace CourseWork.ViewModel {
             get { return _isIdEnabled; }
             set {
                 _isIdEnabled = value;
+                if (_isIdEnabled)
+                {
+                    SelectedTask.Id = Guid.NewGuid();
+                }
                 RaisePropertyChanged(() => IsIdEnabled);
             }
         }

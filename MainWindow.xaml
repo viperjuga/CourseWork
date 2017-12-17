@@ -8,14 +8,14 @@
         xmlns:view="clr-namespace:CourseWork.View"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
-        Title="Task Companion" Height="520" Width="525">
+        Title="Task Companion" Height="520" Width="560">
     <controls:MetroWindow.DataContext>
         <viewModel:MainWindowViewModel/>
     </controls:MetroWindow.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="5.9*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -32,12 +32,14 @@
                 <RowDefinition Height="4*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <DockPanel Margin="4" >
-                <TextBlock Text="Sort filter  " Margin="4,0,0,0" FontWeight="DemiBold" VerticalAlignment="Center"/>
-                <!--<ComboBox Text="Filter"  ItemContainerStyle="{StaticResource ComboBoxItemBlueStyle}"/>-->
-            </DockPanel>
             <controls:Badged Badge="{Binding Path=DeadlineTasks.Count}" Grid.Row="1">
-                <GroupBox Header="Deadlines">
+                <GroupBox>
+                    <GroupBox.Header>
+                        <DockPanel>
+                            
+                            <Label Content="DEADLINES" Foreground="White" FontFamily="{StaticResource ContentFontFamily}"/>
+                        </DockPanel>
+                    </GroupBox.Header>
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
                         <ListBox  ItemsSource="{Binding DeadlineTasks, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedTask}"
                               ScrollViewer.HorizontalScrollBarVisibility="Disabled" Height="60">
@@ -45,11 +47,28 @@
                     </ScrollViewer>
                 </GroupBox>
             </controls:Badged>
+            <Border Grid.Row="2" Margin="5">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="SORT FILTER" FontFamily="{StaticResource ContentFontFamily}" Grid.Row="0" Grid.Column="0" ContentStringFormat="{}{0}:" VerticalAlignment="Center"/>
+                    <ComboBox SelectedItem="{Binding SelectedSort, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding SortFilter}" Grid.Row="0" Grid.Column="1" Margin="5"/>
+                    <Label Content="SEARCH" FontFamily="{StaticResource ContentFontFamily}"  Grid.Row="1" Grid.Column="0" ContentStringFormat="{}{0}:" VerticalAlignment="Center"/>
+                    <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"  Grid.Row="1" Grid.Column="1" Margin="5"/>
+                </Grid>
+            </Border>
             <GroupBox Grid.Row="3">
                 <GroupBox.Header>
                     <DockPanel>
+                        
                         <Label Content="TASKS" Foreground="White" FontFamily="{StaticResource ContentFontFamily}"></Label>
-                        <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
+                        
                     </DockPanel>
                 </GroupBox.Header>
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
@@ -71,7 +90,10 @@
                 <Button Content="Remove" Command="{Binding DeleteCommand}"  Margin="5" Grid.Column="1" Grid.Row="1"/>
             </Grid>
         </Grid>
-        <GroupBox Header="Selected Task" Grid.Column="1" Grid.Row="1" Margin="20,5,5,5">
+        <GroupBox Grid.Column="1" Grid.Row="1" Margin="20,5,5,5">
+            <GroupBox.Header>
+                <Label Content="SELECTED TASK" Foreground="White" FontFamily="{StaticResource ContentFontFamily}"/>
+            </GroupBox.Header>
             <Grid Margin="2">
                 <view:TaskView Task="{Binding DataContext.SelectedTask, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=Window, Mode=FindAncestor}}"
                            IsIdEnabled="False"/>

@@ -19,7 +19,13 @@ using Microsoft.Win32;
 namespace CourseWork.ViewModel {
     public class MainWindowViewModel : ViewModelBase {
         public MainWindowViewModel() {
-            var tasks = CourseWorkFileWorker.LoadFromFile();
+            List<Task> tasks = new List<Task>();
+            try {
+                tasks = CourseWorkFileWorker.LoadFromFile();
+            } catch (Exception ex) {
+                MessageBox.Show($"Couldn't parse saved file\r\nError: {ex.Message}", "Load", MessageBoxButton.OK,
+                    MessageBoxImage.Exclamation);
+            }
             foreach (var task in tasks) {
                 Tasks.Add(new TaskAdapter(task));
             }
@@ -47,17 +53,37 @@ namespace CourseWork.ViewModel {
 
         public ObservableCollection<TaskAdapter> PreviewTasks {
             get {
+                var tasks = Tasks.ToList();
                 if (!string.IsNullOrWhiteSpace(SearchText)) {
-                    return new ObservableCollection<TaskAdapter>(Tasks.Where(e =>
+                    tasks = tasks.Where(e =>
                         e.Name.ToLower().Contains(SearchText.ToLower()) ||
                         e.Id.ToString().ToLower().Contains(SearchText.ToLower()) ||
                         e.Description.ToLower().Contains(SearchText.ToLower()) ||
                         e.Priority.ToString().ToLower().Contains(SearchText.ToLower()) ||
                         e.StartTime.ToString("ddMMyyyyHHmm").ToLower().Contains(SearchText.ToLower()) ||
-                        e.EndTime.ToString("ddMMyyyyHHmm").ToLower().Contains(SearchText.ToLower())).ToList());
-                    ;
+                        e.EndTime.ToString("ddMMyyyyHHmm").ToLower().Contains(SearchText.ToLower())).ToList();
                 }
-                return Tasks;
+                if (!string.IsNullOrWhiteSpace(SelectedSort)) {
+                    switch (SelectedSort) {
+                        case "Name": {
+                                tasks = tasks.OrderBy(e => e.Name).ToList();
+                                break;
+                            }
+                        case "StartTime": {
+                                tasks = tasks.OrderBy(e => e.StartTime).ToList();
+                                break;
+                            }
+                        case "EndTime": {
+                                tasks = tasks.OrderBy(e => e.EndTime).ToList();
+                                break;
+                            }
+                        case "Priority": {
+                                tasks = tasks.OrderBy(e => e.Priority).ToList();
+                                break;
+                            }
+                    }
+                }
+                return new ObservableCollection<TaskAdapter>(tasks);
             }
         }
 
@@ -68,6 +94,29 @@ namespace CourseWork.ViewModel {
                     _deadlinesTasks = new ObservableCollection<TaskAdapter>();
                 }
                 return _deadlinesTasks;
+            }
+        }
+
+        private ObservableCollection<string> _sortFilter;
+        public ObservableCollection<string> SortFilter {
+            get {
+                if (_sortFilter == null) {
+                    _sortFilter = new ObservableCollection<string>
+                    {
+                        "","Name", "StartTime", "EndTime", "Priority"
+                    };
+                }
+                return _sortFilter;
+            }
+        }
+
+        private string _selectedSort;
+        public string SelectedSort {
+            get { return _selectedSort; }
+            set {
+                _selectedSort = value;
+                RaisePropertyChanged(() => PreviewTasks);
+                RaisePropertyChanged(() => SelectedSort);
             }
         }
 
@@ -150,7 +199,7 @@ namespace CourseWork.ViewModel {
 
                             if (result == true) {
                                 string filename = dlg.FileName;
-                               
+
                                 CourseWorkFileWorker.GenerateHtmlDoc(filename, Tasks.Select(e => e.ToTask()).ToList());
                                 MessageBox.Show("Report succesffully created.", "Report", MessageBoxButton.OK,
                                     MessageBoxImage.Information);

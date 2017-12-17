@@ -18,8 +18,8 @@ namespace CourseWork.Adapter {
             _priority = model.Priority;
         }
 
-        private int _id;
-        public int Id {
+        private Guid _id;
+        public Guid Id {
             get { return _id; }
             set {
                 _id = value;
