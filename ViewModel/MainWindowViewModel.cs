@@ -44,6 +44,7 @@ namespace CourseWork.ViewModel {
                         .ToList().ForEach(e => {
                             DeadlineTasks.Add(e);
                         });
+                        RaisePropertyChanged(() => PreviewTasks);
                         RaisePropertyChanged(() => DeadlineTasks);
                     };
                 }
@@ -166,7 +167,7 @@ namespace CourseWork.ViewModel {
                 if (_deleteCommand == null) {
                     _deleteCommand = new RelayCommand(
                         () => {
-                            var result = MessageBox.Show("Are you sure?", "Sure", MessageBoxButton.YesNo);
+                            var result = MessageBox.Show("Are you sure?", "Sure", MessageBoxButton.YesNo, MessageBoxImage.Question);
                             if (result == MessageBoxResult.Yes) {
                                 Tasks.Remove(SelectedTask);
                             }
