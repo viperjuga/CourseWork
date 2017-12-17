@@ -11,15 +11,13 @@ using GalaSoft.MvvmLight.Command;
 namespace CourseWork.ViewModel {
     public class NewTaskViewModel : ViewModelBase {
         public NewTaskViewModel() {
-            _newTask = new TaskAdapter(new Task());
+            _newTask = new TaskAdapter(new Task() { Id = Guid.NewGuid() });
         }
 
         private TaskAdapter _newTask;
-        public TaskAdapter NewTask
-        {
+        public TaskAdapter NewTask {
             get { return _newTask; }
-            set
-            {
+            set {
                 _newTask = value;
                 RaisePropertyChanged(() => NewTask);
             }
