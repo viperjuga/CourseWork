@@ -142,26 +142,16 @@ namespace CourseWork.ViewModel {
                         () => {
                             var dlg = new SaveFileDialog {
                                 FileName = "Report",
-                                DefaultExt = ".txt",
-                                Filter = "Text documents (.txt)|*.txt"
+                                DefaultExt = ".html",
+                                Filter = "HyperText Markup Language documents (.html)|*.html"
                             };
 
                             var result = dlg.ShowDialog();
 
                             if (result == true) {
                                 string filename = dlg.FileName;
-                                var first = DeadlineTasks.FirstOrDefault();
-                                var data =
-                                    $"Total task count = {Tasks.Count}\r\n";
-                                if (first != null)
-                                {
-                                    data += $"The closest one\r\n\tName: {first.Name}\r\n\t" +
-                                            $"Description: {first.Description}\r\n\t" +
-                                            $"StartDate: {first.StartTime:dd/MM/yyyy HH:mm}\r\n\t" +
-                                            $"EndDate: {first.EndTime:dd/MM/yyyy HH:mm}\r\n\t" +
-                                            $"Priority: {first.Priority.ToString()}";
-                                }
-                                File.WriteAllText(filename, data);
+                               
+                                CourseWorkFileWorker.GenerateHtmlDoc(filename, Tasks.Select(e => e.ToTask()).ToList());
                                 MessageBox.Show("Report succesffully created.", "Report", MessageBoxButton.OK,
                                     MessageBoxImage.Information);
                             }

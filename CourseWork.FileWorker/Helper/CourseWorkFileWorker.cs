@@ -53,5 +53,14 @@ namespace CourseWork.FileWorker.Helper {
             File.WriteAllText(FILEPATH, data);
         }
 
+        public static void GenerateHtmlDoc(string path, List<Task> tasks)
+        {
+            var data = string.Join("", tasks.Select(e => $"<tr><td><input type=\"checkbox\"></td><td>{e.StartTime:dd/MM/yyyy HH:mm}</td><td>{e.EndTime:dd/MM/yyyy HH:mm}</td><td>{e.Priority}</td><td>{e.Name}</td> <td>{e.Description}</td></tr>").SelectMany(e => e));
+            var body = $"<table style=\"width:100 %\" cellspacing=\"2\" border=\"1\" cellpadding=\"5\"><tr><th>Status</th><th>StartTime</th><th>EndTime</th><th>Priority</th><th>Name</th><th>Description</th></tr><tr>{data}</tr></table>";
+            var doc =
+                $"<!DOCTYPE HTML><html><head><title>TODO List</title><meta charset=\"utf-8\"></head><body><h1 align=\"center\">TODO list on {DateTime.Now:dd/MM/yyyy HH:mm}</h1>{body}</body></html>";
+            File.WriteAllText(path, doc);
+        }
+
     }
 }
